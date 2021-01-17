@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
+    "start:reload": "nodemon index.js",
     "postgres:start": "docker-compose up -d",
     "postgres:stop": "docker-compose down",
     "migrate": "node src/utils/schema.js"

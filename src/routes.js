@@ -5,13 +5,14 @@ const Auth = require('./controllers/auth');
 const Home = require('./controllers/home');
 const Session = require('./middlewares/session');
 const Password = require('./middlewares/encrypt');
+const UsersController = require('./controllers/users');
 
-
+// HOME
 router.get('/', Home.hello);
 
-// router.post('/auth', Auth.autenticar);
-
-// router.post('/users', Password.encrypt, UsersController.createUser);
+// User creating and authentication
+router.post('/users/auth', Auth.authentication);
+router.post('/users', Password.encrypt, UsersController.createUser);
 
 // router.post('/clientes', Session.verify, ClientsController.addClient);
 // router.put('/clientes', Session.verify, ClientsController.updateClient);

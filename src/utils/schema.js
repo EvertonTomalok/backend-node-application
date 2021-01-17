@@ -44,6 +44,7 @@ const up = async (number = null) => {
  */
 
 // drop(table).then(() => console.log("Ok")).catch(error => console.log("Migração Negada: " + error));
+
 up().then(
 	() => console.log("Ok")
 ).catch

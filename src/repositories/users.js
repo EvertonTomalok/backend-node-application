@@ -12,11 +12,13 @@ async function getUserByEmail(email) {
 }
 
 async function createUser(email, nome, hash) {
-    const query = `INSERT INTO usuarios (
+    const query = `
+    INSERT INTO usuarios (
         email,
         nome,
         senha
-    ) VALUES ($1, $2, $3) RETURNING *;`
+    ) VALUES ($1, $2, $3) RETURNING *;
+    `
 
     const result = await db.query({
         text: query,

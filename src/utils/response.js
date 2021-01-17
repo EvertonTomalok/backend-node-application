@@ -1,5 +1,5 @@
 const response = (ctx, code, data) => {
-    const status = code >= 200 && code <= 399 ? 'sucesso' : 'erro';
+    const status = code >= 200 && code <= 399 ? 'ok' : 'error';
     ctx.status = code;
     ctx.body = {
         status,

@@ -6,7 +6,7 @@ const users = require("../repositories/users");
 
 require('dotenv').config();
 
-async function autenticar(ctx) {
+async function authentication(ctx) {
 
     const { email = null, senha = null } = ctx.request.body;
 
@@ -14,24 +14,21 @@ async function autenticar(ctx) {
         return response(ctx, 400, { mensagem: 'Bad Request' });
     }
 
-    const usuario = await UsersDB.getUserByEmail(email);
-
-    if (usuario) {
-        const comparison = await Password.check(senha, usuario.senha);
-
+    const user = await UsersDB.getUserByEmail(email);
+    if (user) {
+        const comparison = await Password.check(senha, user.senha);
         if (comparison) {
             const token = jwt.sign(
-                { id: usuario.id, email: usuario.email },
+                { id: user.id, email: user.email },
                 process.env.JWT_SECRET,
                 {
-                    expiresIn: '30d'
+                    expiresIn: '1h'
                 }
             );
-            return response(ctx, 200, { token });
+            return response(ctx, 200, { token: "Bearer " + token });
         }
     }
-    return response(ctx, 400, { mensagem: 'Email ou senha incorretos' })
-
+    return response(ctx, 400, { msg: 'Email or password is incorrect.' })
 }
 
-module.exports = { autenticar };
+module.exports = { authentication };

@@ -19,7 +19,6 @@ async function createUser(ctx) {
     }
 
     const newUser = await UsersDB.createUser(email, nome, hash);
-
     if (newUser) {
         return response(ctx, 200, { id: newUser.id });
     }
