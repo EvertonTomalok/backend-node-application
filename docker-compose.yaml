@@ -1,0 +1,14 @@
+version: "3.2"
+
+services:
+    # Start local Postgres
+    postgresql-master:
+        image: 'bitnami/postgresql:latest'
+        ports:
+            - '5432:5432'
+        environment:
+            - POSTGRESQL_USERNAME=my_user
+            - POSTGRESQL_PASSWORD=my_pass
+            - POSTGRESQL_DATABASE=default
+        volumes:
+            - './bitnami/postgresql'

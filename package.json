@@ -1,0 +1,32 @@
+{
+  "name": "academy-desafio4-api",
+  "version": "1.0.0",
+  "description": "Resolução do desafio 4 da primeira turma",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "postgres:start": "docker-compose up -d",
+    "postgres:stop": "docker-compose down",
+    "migrate": "node src/utils/schema.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@git.cubos.io:academy/academy-desafio4-api.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@brazilian-utils/brazilian-utils": "^1.0.0-rc.12",
+    "@koa/cors": "^3.1.0",
+    "axios": "^0.21.0",
+    "bcrypt": "^5.0.0",
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^8.2.0",
+    "jsonwebtoken": "^8.5.1",
+    "koa": "^2.13.0",
+    "koa-bodyparser": "^4.3.0",
+    "koa-router": "^10.0.0",
+    "pg": "^8.5.0"
+  }
+}
