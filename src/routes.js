@@ -11,8 +11,14 @@ const UsersController = require('./controllers/users');
 router.get('/', Home.hello);
 
 // User creating and authentication
-router.post('/users/auth', Auth.authentication);
-router.post('/users', Password.encrypt, UsersController.createUser);
+router
+    .post('/users/auth', Auth.authentication)
+    .post('/users', Password.encrypt, UsersController.createUser);
+
+// TOOLS
+router
+    .post('/tools', Session.verify, console.log)
+
 
 // router.post('/clientes', Session.verify, ClientsController.addClient);
 // router.put('/clientes', Session.verify, ClientsController.updateClient);
