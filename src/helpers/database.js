@@ -1,22 +1,21 @@
-const { Client } = require('pg');
+/* eslint-disable no-console */
 
-require('dotenv').config();
+const { Client } = require("pg");
+
+require("dotenv").config();
 
 const client = new Client({
-    host: process.env.DB_HOST,
-    port: process.env.DB_PORT,
-    password: process.env.DB_PW,
-    user: process.env.DB_USER,
-    database: process.env.DB_NAME,
-    ssl: false,
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
+  password: process.env.DB_PW,
+  user: process.env.DB_USER,
+  database: process.env.DB_NAME,
+  ssl: false,
 });
 
 client
-    .connect()
-    .then(() => console.log('connected'))
-    .catch((err) => console.error('conection error', err.stack));
+  .connect()
+  .then(() => console.log("connected"))
+  .catch((err) => console.error("conection error", err.stack));
 
 module.exports = client;
-
-
-

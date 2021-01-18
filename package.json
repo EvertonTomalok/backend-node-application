@@ -9,7 +9,9 @@
     "start:reload": "nodemon index.js",
     "postgres:start": "docker-compose up -d",
     "postgres:stop": "docker-compose down",
-    "migrate": "node src/utils/schema.js"
+    "migrate": "node src/utils/schema.js",
+    "lint": "eslint ./src",
+    "lint:fix": "eslint --fix --ext .js ./src"
   },
   "repository": {
     "type": "git",
@@ -27,5 +29,10 @@
     "koa-bodyparser": "^4.3.0",
     "koa-router": "^10.0.0",
     "pg": "^8.5.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.18.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1"
   }
 }
