@@ -6,6 +6,7 @@ const Home = require('./controllers/home');
 const Session = require('./middlewares/session');
 const Password = require('./middlewares/encrypt');
 const UsersController = require('./controllers/users');
+const ToolsController = require('./controllers/tools');
 
 // HOME
 router.get('/', Home.hello);
@@ -17,18 +18,9 @@ router
 
 // TOOLS
 router
-    .post('/tools', Session.verify, console.log)
-
-
-// router.post('/clientes', Session.verify, ClientsController.addClient);
-// router.put('/clientes', Session.verify, ClientsController.updateClient);
-// router.get('/clientes', Session.verify, ClientsController.findClients);
-
-// router.post('/cobrancas', Session.verify, PaymentsController.payment);
-// router.put('/cobrancas', Session.verify, PaymentsController.payBillet);
-// router.get('/cobrancas', Session.verify, PaymentsController.getPayments);
-
-// router.get('/relatorios', Session.verify, ReportsController.getReports);
-
+    .get('/tools', Session.verify, ToolsController.findTools)
+    .post('/tools', Session.verify, ToolsController.createTool)
+    .put('/tools', Session.verify, ToolsController.editTool)
+    .delete('/tools/:id', Session.verify, ToolsController.deleteTool);
 
 module.exports = router;

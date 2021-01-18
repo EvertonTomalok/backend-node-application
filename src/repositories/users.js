@@ -1,4 +1,5 @@
 const db = require('../helpers/database');
+const { off } = require('../helpers/database');
 
 async function getUserByEmail(email) {
     const query = `SELECT * FROM usuarios WHERE email = $1`;
