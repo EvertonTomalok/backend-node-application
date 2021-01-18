@@ -21,7 +21,7 @@ router
 router
   .get("/tools", Session.verify, ToolsController.findTools)
   .post("/tools", Session.verify, ToolsController.createTool)
-  .put("/tools", Session.verify, ToolsController.editTool)
+  .put("/tools/:id", Session.verify, ToolsController.editTool)
   .delete("/tools/:id", Session.verify, ToolsController.deleteTool);
 
 module.exports = router;

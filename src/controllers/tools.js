@@ -36,12 +36,13 @@ async function findTools(ctx) {
 
 async function editTool(ctx) {
   const {
-    id,
     title = "",
     description = "",
     link = "",
     tags = null,
   } = ctx.request.body;
+
+  const { id } = ctx.request.params;
 
   if (!id || (!title && !link && !description && !tags)) {
     return response(ctx, 400, "BAD REQUEST!");

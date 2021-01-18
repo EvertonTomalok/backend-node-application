@@ -63,7 +63,7 @@ async function getTools(tag = "", offset = 0, limit = 0) {
 
 async function editTool(id, title = null, link = null, description = null, tags = null) {
   const TITLE = title ? `title='${title}'` : "";
-  const LINK = link ? `link='${link}',` : "";
+  const LINK = link ? `link='${link}'` : "";
   const DESCRIPTION = description ? `description='${description}'` : "";
   const TAGS = tags ? `tags='${buildArrayInserter(tags)}'` : "";
 
