@@ -1,7 +1,7 @@
 {
-  "name": "academy-desafio4-api",
+  "name": "bossa-box-backend-node",
   "version": "1.0.0",
-  "description": "Resolução do desafio 4 da primeira turma",
+  "description": "Desafio Bossa Box Backend",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
