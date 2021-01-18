@@ -1,8 +1,23 @@
 version: "3.2"
 
 services:
+    # web:
+    #     build: .
+    #     command: npm start
+    #     ports:
+    #     - "3000:3000"
+    #     environment:
+    #     - DB_HOST=postgresql
+    #     - DB_PORT=5432
+    #     - DB_PW=my_pass
+    #     - DB_USER=my_user
+    #     - DB_NAME=default
+    #     - JWT_SECRET=secret
+    #     depends_on:
+    #     - postgresql
+
     # Start local Postgres
-    postgresql-master:
+    postgresql:
         image: 'bitnami/postgresql:latest'
         ports:
             - '5432:5432'
