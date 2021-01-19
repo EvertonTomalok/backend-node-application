@@ -15,10 +15,8 @@ const createSetter = (title, link, description, tags) => {
   return setters.join(", ");
 };
 
-const envolveItem = (item) => `"${item}"`;
-
 const buildArrayInserter = (items) => {
-  const elements = items.map(envolveItem);
+  const elements = items.map((item) => `"${item}"`);
   return `{${elements.join(", ")}}`;
 };
 

@@ -41,7 +41,7 @@ const up = async (number = null) => {
       await migrate(value);
     }
   } else {
-    migrate(number);
+    await migrate(number);
   }
   console.log("Migração rodada!");
 };
