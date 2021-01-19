@@ -38,7 +38,7 @@ curl --request GET 'http://127.0.0.1:3000'
 # ENDPOINTS
 
 ## Criar usuário
-Para ver a documentação em swagger:
+Para criar um novo usuário:
 
 - `METHOD`: `POST`
 - `ENDPOINT`: /users
