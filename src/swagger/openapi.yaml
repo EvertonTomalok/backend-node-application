@@ -216,19 +216,13 @@ paths:
                     - webapps
                   id: 600258be6976172455f7ca1a
         '204':
-          description: No item Found
-        '404':
+          description: No content
+        '500':
           description: Something went wrong!
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Message'
-        '422':
-          description: Validation Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HTTPValidationError'
     delete:
       tags:
         - "Tools"
@@ -380,9 +374,6 @@ components:
           type: array
           items:
             type: string
-        id:
-          title: Id
-          type: string
       example:
         title: Notion
         link: 'https://notion.so'

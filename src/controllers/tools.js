@@ -3,7 +3,7 @@
 const response = require("../utils/response");
 const ToolsDB = require("../repositories/tools");
 
-async function createTool(ctx) {
+const createTool = async (ctx) => {
   const {
     title = null,
     link = null,
@@ -11,30 +11,34 @@ async function createTool(ctx) {
     tags = null,
   } = ctx.request.body;
 
+  const { userId } = ctx.state;
+
   if (!title || !link || !description || !tags) {
     return response(ctx, 400, { message: "BAD REQUEST." });
   }
 
-  const tool = await ToolsDB.createTool(title, link, description, tags);
+  const tool = await ToolsDB.createTool(userId, title, link, description, tags);
 
   if (tool) {
     return response(ctx, 201, { tool });
   }
   return response(ctx, 400, { message: "Something went wrong." });
-}
+};
 
-async function findTools(ctx) {
+const findTools = async (ctx) => {
   const {
     tag = "",
     skip = 0,
-    limit = 0,
+    limit = 500,
   } = ctx.request.query;
 
-  const tools = await ToolsDB.getTools(tag, skip, limit);
-  return response(ctx, 200, tools);
-}
+  const { userId } = ctx.state;
 
-async function editTool(ctx) {
+  const tools = await ToolsDB.getTools(userId, tag, skip, limit);
+  return response(ctx, 200, tools);
+};
+
+const editTool = async (ctx) => {
   const {
     title = "",
     description = "",
@@ -42,28 +46,29 @@ async function editTool(ctx) {
     tags = null,
   } = ctx.request.body;
 
+  const { userId } = ctx.state;
   const { id } = ctx.request.params;
 
   if (!id || (!title && !link && !description && !tags)) {
     return response(ctx, 400, "BAD REQUEST!");
   }
 
-  const tool = await ToolsDB.editTool(id, title, description, link, tags);
-  if (tool) {
-    return response(ctx, 200, tool);
+  const tool = await ToolsDB.editTool(userId, id, title, description, link, tags);
+  if (tool.updated) {
+    return response(ctx, 200, tool.data);
+  } if (!tool.updated) {
+    return ctx.response.status = 204;
   }
-  return ctx.response.status = 204;
-}
+  return response(ctx, 500, "SOMETHING WENT WRONG!");
+};
 
-async function deleteTool(ctx) {
+const deleteTool = async (ctx) => {
+  const { userId } = ctx.state;
   const { id } = ctx.request.params;
-  if (!id) {
-    return response(ctx, 400, "BAD REQUEST!");
-  }
 
-  await ToolsDB.deleteTool(id);
+  await ToolsDB.deleteTool(userId, id);
   return ctx.response.status = 204;
-}
+};
 
 module.exports = {
   createTool, deleteTool, editTool, findTools,

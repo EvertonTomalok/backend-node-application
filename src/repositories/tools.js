@@ -1,91 +1,76 @@
-/* eslint-disable no-unused-vars */
+/* eslint-disable no-restricted-syntax */
 
-const db = require("../helpers/database");
-const { off } = require("../helpers/database");
+const { Op } = require("sequelize");
+const Tools = require("../models/tools");
 
-const createSetter = (title, link, description, tags) => {
-  const setters = [];
+async function createTool(userId, title, link, description, tags = []) {
+  const tool = await Tools.create({
+    title,
+    userId,
+    link,
+    description,
+    tags,
+  });
 
-  [title, link, description, tags].forEach((item) => {
-    if (item !== "") {
-      setters.push(item);
+  return tool;
+}
+
+async function getTools(userId, tag = "node", offset = 0, limit = 10) {
+  const whereClause = {
+    userId: {
+      [Op.eq]: userId,
+    },
+  };
+
+  if (tag) {
+    whereClause.tags = {
+      [Op.contains]: [tag],
+    };
+  }
+
+  const result = Tools.findAll({
+    offset,
+    limit,
+    where: whereClause,
+  });
+
+  return result;
+}
+
+async function editTool(userId, id, title = null, link = null, description = null, tags = null) {
+  const updateValues = {
+    title, link, description, tags,
+  };
+
+  // removing null update values
+  Object.keys(updateValues).forEach(
+    (k) => (!updateValues[k] && updateValues[k] !== undefined) && delete updateValues[k],
+  );
+
+  try {
+    const tool = await Tools.update(
+      updateValues,
+      {
+        where: { id, userId },
+        returning: true,
+        plain: true,
+      },
+    );
+    return { updated: true, data: tool[1] };
+  } catch (err) {
+    if (err instanceof TypeError) {
+      return { updated: false, data: {} };
     }
-  });
-
-  return setters.join(", ");
-};
-
-const buildArrayInserter = (items) => {
-  const elements = items.map((item) => `"${item}"`);
-  return `{${elements.join(", ")}}`;
-};
-
-async function createTool(title, link, description, tags) {
-  const query = `
-    INSERT INTO tools (
-        title,
-        link,
-        description,
-        tags
-    ) VALUES ($1, $2, $3, $4) RETURNING *;
-    `;
-
-  const preparedTags = buildArrayInserter(tags);
-
-  const result = await db.query({
-    text: query,
-    values: [title, link, description, preparedTags],
-  });
-
-  return result.rows[0];
+    return { generalErr: true, data: {} };
+  }
 }
 
-async function getTools(tag = "", offset = 0, limit = 0) {
-  const WHERE = tag ? `WHERE '${tag}' = ANY (tags)` : "";
-  const LIMIT = limit > 0 ? `LIMIT ${limit}` : "";
-  const OFFSET = offset > 0 ? `OFFSET ${offset}` : "";
-
-  const query = `
-        SELECT * FROM tools
-        ${WHERE}
-        ${OFFSET}
-        ${LIMIT}
-        `;
-
-  const result = await db.query({
-    text: query,
-  });
-
-  return result.rows;
-}
-
-async function editTool(id, title = null, link = null, description = null, tags = null) {
-  const TITLE = title ? `title='${title}'` : "";
-  const LINK = link ? `link='${link}'` : "";
-  const DESCRIPTION = description ? `description='${description}'` : "";
-  const TAGS = tags ? `tags='${buildArrayInserter(tags)}'` : "";
-
-  const SETTER = createSetter(TITLE, LINK, DESCRIPTION, TAGS);
-
-  const query = `
-        UPDATE tools
-        SET ${SETTER} 
-        WHERE id=${id}
-        RETURNING *;
-    `;
-  const result = await db.query({
-    text: query,
-  });
-  return result.rows.shift();
-}
-
-async function deleteTool(id) {
-  const query = `
-        DELETE FROM tools
-        WHERE id=${id};
-    `;
-  await db.query({
-    text: query,
+async function deleteTool(userId, id) {
+  await Tools.destroy({
+    where: {
+      id,
+      userId,
+    },
   });
 }
 
