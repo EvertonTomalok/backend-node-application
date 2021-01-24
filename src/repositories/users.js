@@ -1,34 +1,16 @@
 /* eslint-disable no-unused-vars */
 
-const db = require("../helpers/database");
-const { off } = require("../helpers/database");
+const Users = require("../models/users");
 
-async function getUserByEmail(email) {
-  const query = "SELECT * FROM usuarios WHERE email = $1";
-
-  const result = await db.query({
-    text: query,
-    values: [email],
-  });
-
-  return result.rows.shift();
-}
+function getUserByEmail(email) {}
 
 async function createUser(email, nome, hash) {
-  const query = `
-    INSERT INTO usuarios (
-        email,
-        nome,
-        senha
-    ) VALUES ($1, $2, $3) RETURNING *;
-    `;
+  const user = Users.build(
+    { email, nome, senha: hash },
+  );
 
-  const result = await db.query({
-    text: query,
-    values: [email, nome, hash],
-  });
-
-  return result.rows[0];
+  const result = await user.save();
+  return result;
 }
 
 module.exports = { getUserByEmail, createUser };

@@ -1,21 +1,15 @@
-/* eslint-disable no-console */
-
-const { Client } = require("pg");
+const { Sequelize } = require("sequelize");
 
 require("dotenv").config();
 
-const client = new Client({
-  host: process.env.DB_HOST,
-  port: process.env.DB_PORT,
-  password: process.env.DB_PW,
-  user: process.env.DB_USER,
-  database: process.env.DB_NAME,
-  ssl: false,
-});
+const HOST = process.env.DB_HOST || "localhost";
+const PORT = process.env.DB_PORT || 5432;
+const PASS = process.env.DB_PW;
+const USER = process.env.DB_USER;
+const DATABASE = process.env.DB_NAME;
 
-client
-  .connect()
-  .then(() => console.log("connected"))
-  .catch((err) => console.error("conection error", err.stack));
+const sequelize = new Sequelize(
+  `postgres://${USER}:${PASS}@${HOST}:${PORT}/${DATABASE}`,
+);
 
-module.exports = client;
+module.exports = sequelize;

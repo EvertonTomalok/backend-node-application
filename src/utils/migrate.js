@@ -1,11 +1,11 @@
 /* eslint-disable no-console */
 
-const Users = require('../models/user');
-const Tools = require('../models/tool');
+const Users = require("../models/users");
+const Tools = require("../models/tools");
 
 const migrate = async () => {
-  await Users.sync();
-  await Tools.sync();
+  await Users.sync({ alter: true });
+  await Tools.sync({ alter: true });
 };
 
 migrate().then(

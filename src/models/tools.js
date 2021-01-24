@@ -1,33 +1,37 @@
 const { DataTypes, Model } = require("sequelize");
-const sequelize = require("../helpers/database-sequelize");
+const sequelize = require("../helpers/database");
 
-class Users extends Model {}
+class Tools extends Model {}
 
-Users.init(
+Tools.init(
   {
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
     },
-    email: {
+    title: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    senha: {
+    link: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    nome: {
+    description: {
       type: DataTypes.STRING,
+      allowNull: false,
+    },
+    tags: {
+      type: DataTypes.ARRAY(DataTypes.STRING),
       allowNull: false,
     },
   },
   {
     sequelize,
-    modelName: "User",
-    tableName: "users",
+    modelName: "Tools",
+    tableName: "tools",
   },
 );
 
-module.exports = Users;
+module.exports = Tools;

@@ -10,7 +10,8 @@
     "start:reload": "nodemon index.js",
     "postgres:start": "docker-compose up -d",
     "postgres:stop": "docker-compose down",
-    "migrate": "node src/utils/schema.js",
+    "migrate": "node src/utils/migrate.js",
+    "drop": "node src/utils/dropAllTables.js",
     "lint": "eslint ./src",
     "lint:fix": "eslint --fix --ext .js ./src"
   },
@@ -32,6 +33,7 @@
     "koa2-swagger-ui": "^5.0.5",
     "pg": "^8.5.1",
     "pg-hstore": "^2.3.3",
+    "prompt-sync": "^4.2.0",
     "sequelize": "^6.4.0",
     "yamljs": "^0.3.0"
   },
