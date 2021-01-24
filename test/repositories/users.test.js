@@ -13,6 +13,16 @@ describe('# Users', function() {
         ).catch(err => {return false});
       });
 
+      it("shouldn't create a new cliente", function() {
+        const email = 'teste@email.com';
+        const nome = 'Tester da Silva';
+        const hash = '12345';
+    
+        Users.createUser(email, nome, hash).then(
+            user => {expect(user.id).not.to.equal(1);}
+        ).catch(err => {return true});
+      });
+
       it('should find a client.', function() {
         const email = 'teste@email.com';
     
