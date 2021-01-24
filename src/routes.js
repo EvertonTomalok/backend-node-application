@@ -1,8 +1,8 @@
 const Router = require("koa-router");
 
 const router = new Router();
-const koaSwagger = require('koa2-swagger-ui');
-const yamljs = require('yamljs');
+const koaSwagger = require("koa2-swagger-ui");
+const yamljs = require("yamljs");
 
 const Auth = require("./controllers/auth");
 const Home = require("./controllers/home");
@@ -11,7 +11,7 @@ const Password = require("./middlewares/encrypt");
 const UsersController = require("./controllers/users");
 const ToolsController = require("./controllers/tools");
 
-const spec = yamljs.load('./src/swagger/openapi.yaml');
+const spec = yamljs.load("./src/swagger/openapi.yaml");
 
 // HOME
 router.get("/", Home.hello);
