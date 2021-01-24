@@ -4,7 +4,7 @@
   "description": "Desafio Bossa Box Backend",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "export TESTING=true && export LOGGING=false && npm run migrate && mocha 'test/**/*.js' --recursive && npm run drop",
     "setup": "npm install",
     "start": "node index.js",
     "start:reload": "nodemon index.js",
@@ -38,8 +38,10 @@
     "yamljs": "^0.3.0"
   },
   "devDependencies": {
+    "chai": "*",
     "eslint": "^7.18.0",
     "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-plugin-import": "^2.22.1"
+    "eslint-plugin-import": "^2.22.1",
+    "mocha": "^8.2.1"
   }
 }
