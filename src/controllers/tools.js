@@ -11,11 +11,13 @@ async function createTool(ctx) {
     tags = null,
   } = ctx.request.body;
 
+  const userId = ctx.state.userId;
+
   if (!title || !link || !description || !tags) {
     return response(ctx, 400, { message: "BAD REQUEST." });
   }
 
-  const tool = await ToolsDB.createTool(title, link, description, tags);
+  const tool = await ToolsDB.createTool(userId, title, link, description, tags);
 
   if (tool) {
     return response(ctx, 201, { tool });

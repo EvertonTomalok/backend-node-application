@@ -1,43 +1,16 @@
-/* eslint-disable no-unused-vars */
+const Tools = require('../models/tools')
 
-const db = require("../helpers/database");
-const { off } = require("../helpers/database");
+async function createTool(userId, title, link, description, tags = []) {
 
-const createSetter = (title, link, description, tags) => {
-  const setters = [];
-
-  [title, link, description, tags].forEach((item) => {
-    if (item !== "") {
-      setters.push(item);
-    }
+  const tool = await Tools.create({
+    title,
+    userId,
+    link,
+    description,
+    tags
   });
 
-  return setters.join(", ");
-};
-
-const buildArrayInserter = (items) => {
-  const elements = items.map((item) => `"${item}"`);
-  return `{${elements.join(", ")}}`;
-};
-
-async function createTool(title, link, description, tags) {
-  const query = `
-    INSERT INTO tools (
-        title,
-        link,
-        description,
-        tags
-    ) VALUES ($1, $2, $3, $4) RETURNING *;
-    `;
-
-  const preparedTags = buildArrayInserter(tags);
-
-  const result = await db.query({
-    text: query,
-    values: [title, link, description, preparedTags],
-  });
-
-  return result.rows[0];
+  return tool;
 }
 
 async function getTools(tag = "", offset = 0, limit = 0) {

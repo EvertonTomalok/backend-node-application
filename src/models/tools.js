@@ -1,5 +1,6 @@
 const { DataTypes, Model } = require("sequelize");
 const sequelize = require("../helpers/database");
+const Users = require("./users");
 
 class Tools extends Model {}
 
@@ -9,6 +10,11 @@ Tools.init(
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
+    },
+    userId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: Users.id
     },
     title: {
       type: DataTypes.STRING,
