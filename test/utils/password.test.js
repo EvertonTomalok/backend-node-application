@@ -1,7 +1,7 @@
 const expect = require('chai').expect;
 const Password = require('../../src/utils/password');
 
-describe('Password', function() {
+describe('# Password', function() {
   describe('Encrypt', function() {
     it('should return a valid hash', function() {
       Password.encrypt('12345').then(
