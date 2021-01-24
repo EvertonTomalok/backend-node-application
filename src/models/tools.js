@@ -14,7 +14,7 @@ Tools.init(
     userId: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      references: Users.id
+      references: Users.id,
     },
     title: {
       type: DataTypes.STRING,
