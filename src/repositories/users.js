@@ -1,16 +1,17 @@
-/* eslint-disable no-unused-vars */
-
 const Users = require("../models/users");
 
-function getUserByEmail(email) {}
-
-async function createUser(email, nome, hash) {
-  const user = Users.build(
-    { email, nome, senha: hash },
-  );
-
-  const result = await user.save();
+const getUserByEmail = async (email) => {
+  const result = await Users.findOne({
+    where: {
+      email,
+    },
+  });
   return result;
-}
+};
+
+const createUser = async (email, nome, hash) => {
+  const result = await Users.create({ email, nome, senha: hash });
+  return result;
+};
 
 module.exports = { getUserByEmail, createUser };
