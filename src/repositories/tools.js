@@ -1,4 +1,5 @@
 const Tools = require('../models/tools')
+const { Op } = require("sequelize");
 
 async function createTool(userId, title, link, description, tags = []) {
 
@@ -13,23 +14,44 @@ async function createTool(userId, title, link, description, tags = []) {
   return tool;
 }
 
-async function getTools(tag = "", offset = 0, limit = 0) {
-  const WHERE = tag ? `WHERE '${tag}' = ANY (tags)` : "";
-  const LIMIT = limit > 0 ? `LIMIT ${limit}` : "";
-  const OFFSET = offset > 0 ? `OFFSET ${offset}` : "";
+async function getTools(userId, tag = "node", offset = 0, limit = 10) {
+  
+  const whereClause = {
+    userId: {
+      [Op.eq]: userId,
+    }
+  };
 
-  const query = `
-        SELECT * FROM tools
-        ${WHERE}
-        ${OFFSET}
-        ${LIMIT}
-        `;
+  if (tag) { 
+    whereClause.tags = {
+      [Op.contains]: [tag],
+    }
+  }
 
-  const result = await db.query({
-    text: query,
-  });
+  const result = Tools.findAll({
+    offset, 
+    limit,
+    where: whereClause
+  })
 
-  return result.rows;
+  return result;
+
+  // const WHERE = tag ? `WHERE '${tag}' = ANY (tags)` : "";
+  // const LIMIT = limit > 0 ? `LIMIT ${limit}` : "";
+  // const OFFSET = offset > 0 ? `OFFSET ${offset}` : "";
+
+  // const query = `
+  //       SELECT * FROM tools
+  //       ${WHERE}
+  //       ${OFFSET}
+  //       ${LIMIT}
+  //       `;
+
+  // const result = await db.query({
+  //   text: query,
+  // });
+
+  // return result.rows;
 }
 
 async function editTool(id, title = null, link = null, description = null, tags = null) {

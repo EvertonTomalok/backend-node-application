@@ -29,10 +29,12 @@ async function findTools(ctx) {
   const {
     tag = "",
     skip = 0,
-    limit = 0,
+    limit = 500,
   } = ctx.request.query;
 
-  const tools = await ToolsDB.getTools(tag, skip, limit);
+  const userId = ctx.state.userId;
+
+  const tools = await ToolsDB.getTools(userId, tag, skip, limit);
   return response(ctx, 200, tools);
 }
 
