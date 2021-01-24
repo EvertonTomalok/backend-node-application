@@ -1,0 +1,433 @@
+openapi: 3.0.2
+info:
+  title: Bossa-Box-Backend-Node
+  version: 0.1.0
+tags:
+  - name: "Home"
+    description: "home"
+  - name: "Health"
+    description: "Use this endpoint to check the health from the API."
+  - name: "Tools"
+    description: "Endpoints to the CRUD."
+  - name: "User"
+    description: "Create or login a user."
+
+paths:
+  /:
+    get:
+      tags:
+      - "Home"
+      summary: Home
+      operationId: home
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            text/html:
+              schema:
+                type: string
+  /health:
+    get:
+      tags:
+        - "Health"
+      summary: Health
+      operationId: health_health_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /tools:
+    get:
+      tags:
+        - "Tools"
+      summary: Get Tools
+      operationId: get_tools_tools_get
+      parameters:
+        - required: false
+          schema:
+            title: Tag
+            type: string
+            default: ''
+          name: tag
+          in: query
+        - required: false
+          schema:
+            title: Skip
+            type: integer
+            default: 0
+          name: skip
+          in: query
+        - required: false
+          schema:
+            title: Limit
+            type: integer
+            default: 10
+          name: limit
+          in: query
+        - required: false
+          schema:
+            title: Authorization
+            type: string
+            default: ''
+          name: authorization
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '201':
+          description: Item insert with success
+          content:
+            application/json:
+              example:
+                status: ok
+                data:
+                  - title: hotel
+                    link: 'https://github.com/typicode/hotel'
+                    description: >-
+                      Local app manager. Start apps within your browser,
+                      developer tool with local .localhost domain and https out
+                      of the box.
+                    tags:
+                      - Java
+                      - gcloud
+                      - webapps
+                    id: 600258be6976172455f7ca1a
+                  - title: hotel
+                    link: 'https://github.com/typicode/hotel'
+                    description: >-
+                      Local app manager. Start apps within your browser,
+                      developer tool with local .localhost domain and https out
+                      of the box.
+                    tags:
+                      - Java
+                      - gcloud
+                      - webapps
+                    id: 600258be6976172455f7ca1a
+        '404':
+          description: Something went wrong!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    post:
+      tags:
+        - "Tools"
+      summary: Tools Send
+      operationId: tools_send_tools_post
+      parameters:
+        - required: false
+          schema:
+            title: Authorization
+            type: string
+            default: ''
+          name: authorization
+          in: header
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Tool'
+        required: true
+      responses:
+        '201':
+          description: Item insert with success
+          content:
+            application/json:
+              schema: {}
+              example:
+                status: ok
+                data:
+                  title: hotel
+                  link: 'https://github.com/typicode/hotel'
+                  description: >-
+                    Local app manager. Start apps within your browser, developer
+                    tool with local .localhost domain and https out of the box.
+                  tags:
+                    - Java
+                    - gcloud
+                    - webapps
+                  id: 600258be6976172455f7ca1a
+        '404':
+          description: Something went wrong!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  '/tools/{id}':
+    put:
+      tags:
+        - "Tools"
+      summary: Tool Update
+      operationId: tool_update_tools__id__put
+      parameters:
+        - required: true
+          schema:
+            title: The ID of the item to delete
+            type: string
+          name: id
+          in: path
+        - required: false
+          schema:
+            title: Authorization
+            type: string
+            default: ''
+          name: authorization
+          in: header
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Tool'
+        required: true
+      responses:
+        '200':
+          description: Item updated with success
+          content:
+            application/json:
+              schema: {}
+              example:
+                status: ok
+                data:
+                  title: hotel
+                  link: 'https://github.com/typicode/hotel'
+                  description: >-
+                    Local app manager. Start apps within your browser, developer
+                    tool with local .localhost domain and https out of the box.
+                  tags:
+                    - Java
+                    - gcloud
+                    - webapps
+                  id: 600258be6976172455f7ca1a
+        '204':
+          description: No item Found
+        '404':
+          description: Something went wrong!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+        - "Tools"
+      summary: Tool Delete
+      operationId: tool_delete_tools__id__delete
+      parameters:
+        - required: true
+          schema:
+            title: The ID of the item to delete
+            type: string
+          name: id
+          in: path
+        - required: false
+          schema:
+            title: Authorization
+            type: string
+            default: ''
+          name: authorization
+          in: header
+      responses:
+        '204':
+          description: No content
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /users:
+    post:
+      tags:
+      - "User"
+      summary: Create a new User
+      operationId: create_token_token_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
+      responses:
+        '201':
+          description: Token created with success
+          content:
+            application/json:
+              schema: {}
+              example:
+                status: ok
+                data:
+                  token: >-
+                    Bearer
+                    eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiRXZlcnRvbiBUb21hbG9rIn0.OroiSjd5H1R3e1AexgP8US6UxHopAZDOHZ6jE09CyMQ
+        '404':
+          description: Something went wrong!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /users/auth:
+    post:
+      tags:
+      - "User"
+      summary: Login the user
+      operationId: auth_user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: "object"
+              additionalProperties:
+                type: "string"
+              example:
+                email: "string"
+                senha: "string"
+
+        required: true
+      responses:
+        '201':
+          description: Token created with success
+          content:
+            application/json:
+              schema: {}
+              example:
+                status: ok
+                data:
+                  token: Bearer ...
+        '404':
+          description: Something went wrong!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    HTTPValidationError:
+      title: HTTPValidationError
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationError'
+    Message:
+      title: Message
+      type: object
+      properties:
+        status:
+          title: Status
+          type: string
+          default: error
+        data:
+          title: Data
+          type: object
+          default:
+            msg: Something went wrong!
+    Tool:
+      title: Tool
+      required:
+        - title
+        - link
+        - description
+        - tags
+      type: object
+      properties:
+        title:
+          title: Title
+          type: string
+        link:
+          title: Link
+          type: string
+        description:
+          title: Description
+          type: string
+        tags:
+          title: Tags
+          type: array
+          items:
+            type: string
+        id:
+          title: Id
+          type: string
+      example:
+        title: Notion
+        link: 'https://notion.so'
+        description: >-
+          All in one tool to organize teams and ideas. Write, plan, collaborate,
+          and get organized. 
+        tags:
+          - organization
+          - planning
+          - collaboration
+          - writing
+          - calendar
+    User:
+      title: User
+      required:
+        - nome
+        - email
+        - senha
+      type: object
+      properties:
+        nome:
+          title: Noem
+          type: string
+        email:
+          title: Email
+          type: string
+        senha:
+          title: Senha
+          type: string
+    ValidationError:
+      title: ValidationError
+      required:
+        - loc
+        - msg
+        - type
+      type: object
+      properties:
+        loc:
+          title: Location
+          type: array
+          items:
+            type: string
+        msg:
+          title: Message
+          type: string
+        type:
+          title: Error Type
+          type: string

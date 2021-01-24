@@ -29,7 +29,9 @@
     "koa": "^2.13.0",
     "koa-bodyparser": "^4.3.0",
     "koa-router": "^10.0.0",
-    "pg": "^8.5.0"
+    "koa2-swagger-ui": "^5.0.5",
+    "pg": "^8.5.0",
+    "yamljs": "^0.3.0"
   },
   "devDependencies": {
     "eslint": "^7.18.0",
