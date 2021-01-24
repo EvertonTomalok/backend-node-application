@@ -230,11 +230,11 @@ Rota para remoção de documento por um ids
 # Variáveis de ambiente
 
 
-| Chave      | Descrição                     |
-|------------|-------------------------------|
-| DB_HOST    | HOST de acesso ao PostGres    |
-| DB_PORT    | PORTA de acesso ao PostGres   |
-| DB_PW      | Senha do PostGres             |
-| DB_USER    | Usuário do PostGres           |
-| DB_NAME    | Nome do databa no PostGres    |
-| JWT_SECRET | Segredo para geração de token |
+| Chave      | Descrição                                  |
+|------------|--------------------------------------------| 
+| DB_HOST    | HOST de acesso ao PostGres                 |
+| DB_PORT    | PORTA de acesso ao PostGres                |
+| DB_PW      | Senha do PostGres                          |
+| DB_USER    | Usuário do PostGres                        |
+| DB_NAME    | Nome do databa no PostGres                 |
+| JWT_SECRET | Segredo para geração de token              |

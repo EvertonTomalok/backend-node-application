@@ -9,7 +9,9 @@ const dropAll = async () => {
   await Tools.drop();
 };
 
-const answer = prompt("Are you sure? [y/[n] ");
+require("dotenv").config();
+
+const answer = process.env.TESTING === "true" ? "y" : prompt("Are you sure? [y/[n] ");
 
 if (answer.toLowerCase() === "y") {
   console.log("Ihhhaaa... We're getting crazy!!");
