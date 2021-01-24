@@ -7,10 +7,10 @@ const Tools = require("../models/tools");
 require("dotenv").config();
 
 const ANSWER = process.env.TESTING === "true" ? "y" : prompt("Are you sure? [y/[n] ");
-const LOGGING = process.env.LOGGING === 'false'?false:true;
+const LOGGING = process.env.LOGGING !== "false";
 
-const log = (text="") => {
-  if (LOGGING){
+const log = (text = "") => {
+  if (LOGGING) {
     console.log(text);
   }
 };
