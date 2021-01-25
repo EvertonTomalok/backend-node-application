@@ -15,7 +15,7 @@ async function createTool(userId, title, link, description, tags = []) {
   return tool;
 }
 
-async function getTools(userId, tag = "node", offset = 0, limit = 10) {
+async function getTools(userId, tag = "", offset = 0, limit = 10) {
   const whereClause = {
     userId: {
       [Op.eq]: userId,

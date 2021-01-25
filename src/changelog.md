@@ -1,3 +1,12 @@
+# CHANGELOG.md
+
+## 1.1.0 (2021-01-24) # Release
+
+Features:
+
+- Tests was implemented
+
+
 ## 1.0.0 (2021-01-24) # Release
 
 Features:
