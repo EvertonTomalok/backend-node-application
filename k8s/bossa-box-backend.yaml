@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bossa-box-backend
+  labels:
+    app: bossa-box-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bossa-box-backend
+  template:
+    metadata:
+      labels:
+        app: bossa-box-backend
+    spec:
+      containers:
+        - name: bossa-box-backend
+          image: gcr.io/eiprice-development/queuemanager.0.0.1
+          ports:
+            - containerPort: 3000
+          env:
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: bossa-box-backend-secrets
+                  key: jwt_secret
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: bossa-box-backend-secrets
+                  key: db_user
+            - name: DB_PW
+              valueFrom:
+                secretKeyRef:
+                  name: bossa-box-backend-secrets
+                  key: db_pw
+            - name: DB_NAME
+              value: "bossa-box-backend"
+            - name: DB_HOST
+              value: "postgres-bossa-box"

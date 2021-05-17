@@ -1,10 +1,10 @@
-name: Node.js CI - ONLY lint
+name: Node.js CI-CD to kubernetes
 
 on:
   push:
-    branches: [ "!main" ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ "!main" ]
+    branches: [ "main" ]
 
 jobs:
   build:
