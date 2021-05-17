@@ -61,12 +61,8 @@ jobs:
       with:
         github_token: ${{ secrets.PERSONAL_TOKEN }}
 
-    - name: Build and push
-      id: docker_build
-      uses: docker/build-push-action@v2
-      with:
-        push: true
-        context: .
-        file: ./Dockerfile
-        platforms: linux/amd64,linux/arm64,linux/386
-        tags: evertontomalok/bossabox-backend-node:${{ steps.tagging.outputs.new_version }}
+    - name: Build container image
+      run: evertontomalok/bossabox-backend-node:${{ steps.tagging.outputs.new_version }} .
+    
+    - name: Push image to DigitalOcean Container Registry
+      run: docker push evertontomalok/bossabox-backend-node:${{ steps.tagging.outputs.new_version }}
