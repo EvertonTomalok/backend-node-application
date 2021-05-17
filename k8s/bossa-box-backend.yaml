@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: bossa-box-backend
-          image: gcr.io/eiprice-development/queuemanager.0.0.1
+          image: evertontomalok/bossabox-backend-node:latest
           ports:
             - containerPort: 3000
           env:
