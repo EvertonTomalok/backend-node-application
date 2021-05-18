@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-config
+  labels:
+    app: postgres
+data:
+  POSTGRES_DB: bossa_box_backend
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: hZmc-:8!c#$QBTZM

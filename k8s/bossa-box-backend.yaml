@@ -36,6 +36,6 @@ spec:
                   name: bossa-box-backend-secrets
                   key: db_pw
             - name: DB_NAME
-              value: "bossa-box-backend"
+              value: "bossa_box_backend"
             - name: DB_HOST
-              value: "postgres-bossa-box"
+              value: "postgres"
