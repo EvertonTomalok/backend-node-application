@@ -395,7 +395,7 @@ components:
       type: object
       properties:
         nome:
-          title: Noem
+          title: Nome
           type: string
         email:
           title: Email
