@@ -10,10 +10,7 @@ const PASS = process.env.DB_PW || "my_pass";
 const USER = process.env.DB_USER || "my_user";
 
 const sequelize = new Sequelize(
-  `postgres://${USER}:${PASS}@${HOST}:${PORT}/${DATABASE}`,
-  {
-    ssl: HOST !== "localhost",
-  },
+  `postgres://${USER}:${PASS}@${HOST}:${PORT}/${DATABASE}?ssl=${HOST !== "localhost"}`,
   { logging: LOGGING },
 );
 
