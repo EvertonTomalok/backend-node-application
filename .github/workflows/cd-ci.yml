@@ -52,3 +52,17 @@ jobs:
     
     - name: Push image to Container Registry
       run: docker push evertontomalok/bossabox-backend-node:${{ steps.tagging.outputs.new_version }}
+
+    - name: Install doctl
+      uses: digitalocean/action-doctl@v2
+      with:
+        token: ${{ secrets.DIGITALOCEAN_TOKEN }}
+
+    - name: Setup kubectl
+      uses: matootie/dokube@v1.3.2
+      with:
+        personalAccessToken: ${{ secrets.DIGITALOCEAN_TOKEN }}
+        clusterName: live-k8s
+
+    - name: set deployment image
+      run: kubectl set image deployment bossa-box-backend bossa-box-backend=evertontomalok/bossabox-backend-node:${{ steps.tagging.outputs.new_version }}

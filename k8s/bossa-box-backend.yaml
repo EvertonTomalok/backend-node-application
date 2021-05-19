@@ -17,6 +17,7 @@ spec:
       containers:
         - name: bossa-box-backend
           image: evertontomalok/bossabox-backend-node:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 3000
           env:
