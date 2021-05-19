@@ -62,7 +62,7 @@ jobs:
       uses: matootie/dokube@v1.3.2
       with:
         personalAccessToken: ${{ secrets.DIGITALOCEAN_TOKEN }}
-        clusterName: live-k8s
+        clusterName: k8s-teste
 
     - name: set deployment image
       run: kubectl set image deployment bossa-box-backend bossa-box-backend=evertontomalok/bossabox-backend-node:${{ steps.tagging.outputs.new_version }}
