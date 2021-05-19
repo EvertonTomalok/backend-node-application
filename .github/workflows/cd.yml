@@ -3,13 +3,10 @@ name: Node.js CI - ONLY lint
 on:
   push:
     branches:
-      - '!master' 
-      - '*'
+      - '!master'
   pull_request:
     branches: 
-      - '!master' 
-      - '*'
-
+      - '!master'
 jobs:
   build:
 
