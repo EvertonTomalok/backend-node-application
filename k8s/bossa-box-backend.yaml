@@ -5,7 +5,7 @@ metadata:
   labels:
     app: bossa-box-backend
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: bossa-box-backend
@@ -37,6 +37,8 @@ spec:
                   name: bossa-box-backend-secrets
                   key: db_password
             - name: DB_NAME
-              value: "bossa_box_backend"
+              value: "backend"
             - name: DB_HOST
-              value: "postgres"
+              value: "db-postgresql-backend-do-user-7671277-0.b.db.ondigitalocean.com"
+            - name: DB_PORT
+              value: "25060"

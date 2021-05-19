@@ -24,6 +24,6 @@ services:
         environment:
             - POSTGRESQL_USERNAME=my_user
             - POSTGRESQL_PASSWORD=my_pass
-            - POSTGRESQL_DATABASE=default
+            - POSTGRESQL_DATABASE=backend
         volumes:
             - './bitnami/postgresql'
