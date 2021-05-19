@@ -2,11 +2,11 @@ name: Node.js CI - ONLY lint
 
 on:
   push:
-    branches:
-      - '!master'
+    branches-ignore:
+      - master
   pull_request:
-    branches: 
-      - '!master'
+    branches-ignore:
+      - master
 jobs:
   build:
 

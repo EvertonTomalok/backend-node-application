@@ -1,8 +1,5 @@
 const { Sequelize } = require("sequelize");
 
-// eslint-disable-next-line no-console
-console.log("a");
-
 require("dotenv").config();
 
 const LOGGING = process.env.LOGGING !== "false";
