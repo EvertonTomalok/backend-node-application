@@ -12,7 +12,6 @@ const USER = process.env.DB_USER || "my_user";
 const sequelize = new Sequelize(
   `postgres://${USER}:${PASS}@${HOST}:${PORT}/${DATABASE}`,
   {
-    dialect: "postgres",
     ssl: HOST !== "localhost",
   },
   { logging: LOGGING },
