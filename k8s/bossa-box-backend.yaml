@@ -34,7 +34,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: bossa-box-backend-secrets
-                  key: db_pw
+                  key: db_password
             - name: DB_NAME
               value: "bossa_box_backend"
             - name: DB_HOST
