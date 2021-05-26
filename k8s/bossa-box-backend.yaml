@@ -18,6 +18,13 @@ spec:
         - name: bossa-box-backend
           image: evertontomalok/bossabox-backend-node:latest
           imagePullPolicy: Always
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "150m"
+            limits:
+              memory: "640Mi"
+              cpu: "450m"
           ports:
             - containerPort: 3000
           env:
